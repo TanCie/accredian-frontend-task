@@ -1,8 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 const ReferButton = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -33,16 +35,45 @@ const ReferButton = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3001/api/referrals", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      setIsSubmitting(true);
+      // First, submit the referral
+      const referralResponse = await fetch(
+        "http://localhost:3001/api/referrals",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
-      if (response.ok) {
-        alert("Referral submitted successfully!");
+      if (referralResponse.ok) {
+        toast.success("Referral submitted successfully!");
+
+        // Send the email after successful referral submission
+        const emailResponse = await fetch(
+          "http://localhost:3001/api/send-emails",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              to: formData.refereeEmail, // Use the referee's email
+              subject: "Exclusive Discount Just for You!",
+              body: "Click the link below to claim your discount: http://example.com/discount",
+            }),
+          }
+        );
+
+        if (emailResponse.ok) {
+          console.log("Email sent successfully!");
+        } else {
+          console.log("Failed to send email");
+        }
+
+        // Reset form and close modal
         setFormData({
           name: "",
           email: "",
@@ -53,11 +84,13 @@ const ReferButton = () => {
         });
         closeModal();
       } else {
-        alert("Error submitting referral!");
+        toast.error("Please make sure you aren't using an existing Email!");
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Something went wrong!");
+      toast.error("Something went wrong!");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -66,15 +99,15 @@ const ReferButton = () => {
       {/* Trigger Button */}
       <button
         onClick={openModal}
-        className="btn btn-lg px-12 bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 rounded mt-15"
+        className="btn btn-lg px-12 bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 rounded mt-5 md:mt-15"
       >
         Refer Now
       </button>
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-transparent bg-opacity-50">
-          <div className="bg-blue-300 p-8 rounded-lg w-1/3">
+        <div className="fixed inset-0 z-40 flex items-center justify-center bg-transparent bg-opacity-50">
+          <div className="bg-blue-300 p-8 rounded-lg w-4/5 lg:w-1/3">
             <h3 className="font-bold text-center text-3xl mb-10">
               Referral Form
             </h3>
@@ -173,14 +206,21 @@ const ReferButton = () => {
                 </select>
               </div>
 
-              <div className="flex justify-around">
-                <button type="submit" className="btn btn-success px-8">
-                  Submit
+              <div className="flex justify-around mt-6">
+                <button
+                  type="submit"
+                  className="btn btn-lg font-bold btn-success px-10"
+                >
+                  {isSubmitting ? (
+                    <span className="loading loading-bars loading-sm"></span>
+                  ) : (
+                    <p>Submit</p>
+                  )}
                 </button>
                 <button
                   onClick={closeModal}
                   type="button"
-                  className="btn btn-error px-8"
+                  className="btn btn-lg btn-error font-bold px-10"
                 >
                   Close
                 </button>

@@ -30,36 +30,34 @@ const Table = () => {
   ];
 
   return (
-    <div className="m-6 shadow-[0px_4px_65px_1px_rgba(0,7,43,0.21)] backdrop-blur-md bg-opacity-50">
-      <table className="min-w-full rounded-lg overflow-hidden">
+    <div className="m-6 mr-0 shadow-[0px_4px_65px_1px_rgba(0,7,43,0.21)] backdrop-blur-md bg-opacity-50 overflow-x-auto sm:overflow-hidden">
+      <table className="lg:w-full mx-auto rounded-lg">
         <thead className="bg-blue-200">
           <tr>
-            <th className="w-1/2 px-6 py-3 text-left text-lg font-medium text-gray-600 uppercase tracking-wider">
+            <th className="px-4 py-3 text-left text-lg font-medium text-gray-600 uppercase tracking-wider">
               Programs
             </th>
-            <th className="w-1/4 px-6 py-3 text-left text-lg font-medium text-gray-600 uppercase tracking-wider">
+            <th className="px-4 py-3 text-left text-lg font-medium text-gray-600 uppercase tracking-wider">
               Referrer Bonus
             </th>
-            <th className="w-1/4 px-6 py-3 text-left text-lg font-medium text-gray-600 uppercase tracking-wider">
+            <th className="px-4 py-3 text-left text-lg font-medium text-gray-600 uppercase tracking-wider">
               Referee Bonus
             </th>
           </tr>
         </thead>
         <tbody className="bg-[#EEF5FF] divide-y divide-gray-200">
           {programs.map((program, index) => (
-            <tr key={index}>
-              <td className="w-1/2 px-6 py-6 whitespace-nowrap text-gray-900">
+            <tr key={index} className="text-gray-900">
+              <td className="px-4 py-4 whitespace-normal break-words">
                 <div className="flex gap-2 items-center">
                   <GiGraduateCap className="text-2xl text-blue-700" />
-                  {program}
+                  <span className="break-words">{program}</span>
                 </div>
               </td>
-              <td className="w-1/4 px-6 py-6 whitespace-nowrap text-gray-900">
+              <td className="px-4 py-4 text-gray-900">
                 ₹ {referralBonus[index]}
               </td>
-              <td className="w-1/4 px-6 py-6 whitespace-nowrap text-gray-900">
-                ₹ {refBonus[index]}
-              </td>
+              <td className="px-4 py-4 text-gray-900">₹ {refBonus[index]}</td>
             </tr>
           ))}
         </tbody>

@@ -7,7 +7,7 @@ import Faq from "./components/Faq";
 
 function App() {
   return (
-    <div>
+    <div className="">
       <Navbar />
       <Hero />
       <Diagram />

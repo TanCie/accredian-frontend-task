@@ -30,20 +30,20 @@ const footerLinks = [
 const Footer = () => {
   return (
     <div className="bg-[#282828] text-gray-200 mt-16 p-10">
-      <div className="w-[80%] mx-auto">
-        <div className="flex justify-between">
+      <div className="w-[90%] mx-auto">
+        <div className="flex flex-col md:flex-row items-center gap-5 justify-between">
           <img src="/accredainnew.webp" alt="" className="w-48" />
           <div className="flex flex-col items-center">
-            <button className="btn text-xl py-6 px-16 btn-primary">
+            <button className="btn text-lg md:text-xl py-6 px-16 btn-primary">
               Schedule a call
             </button>
             <p>Speak with our Learning Advisor</p>
           </div>
         </div>
         {/* 2nd half */}
-        <div className="flex justify-around mt-15">
+        <div className="flex flex-col lg:flex-row justify-around mt-15">
           <div className="">
-            <h2 className="text-2xl mb-5">Programs</h2>
+            <h2 className="text-3xl font-bold mb-5">Programs</h2>
             <ul>
               {programs.map((program, index) => (
                 <li key={index}>
@@ -56,7 +56,7 @@ const Footer = () => {
             </ul>
           </div>
           {/* 2nd part */}
-          <div className="p-8 pt-2">
+          <div className="p-0 mt-6 md:mt-0 md:p-8 pt-2">
             {/* Example background and padding */}
             <div className="mx-auto">
               {" "}
@@ -64,7 +64,7 @@ const Footer = () => {
               <div className="mb-8">
                 {" "}
                 {/* Contact Us Section */}
-                <h3 className="text-xl font-bold mb-4">Contact Us</h3>
+                <h3 className="text-3xl font-bold mb-4">Contact Us</h3>
                 <p className="mb-2">
                   Email us (For Data Science Queries):{" "}
                   <a
@@ -96,12 +96,6 @@ const Footer = () => {
                   Office Address: 4th Floor, 250, Phase IV, Udyog Vihar, Sector
                   18, <br /> Gurugram, Haryana 122015
                 </p>
-              </div>
-              <div className="mb-8">
-                {" "}
-                {/* Why Accredian Section (if needed) */}
-                <h3 className="text-xl font-bold mb-4">Why Accredian</h3>
-                {/* Add content here */}
               </div>
               <div>
                 {" "}
@@ -139,8 +133,8 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="">
-            <h2 className="text-2xl mb-5">Accredian</h2>
+          <div className="mt-10">
+            <h2 className="text-3xl font-bold mb-5">Accredian</h2>
             <ul>
               {footerLinks.map((links, index) => (
                 <li key={index}>
@@ -152,7 +146,7 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-        <img src="/footer.png" alt="" className="mt-8 h-30" />
+        <img src="/footer.png" alt="" className="mt-8 w-full" />
       </div>
     </div>
   );
