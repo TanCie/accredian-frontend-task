@@ -39,7 +39,7 @@ const ReferButton = () => {
     try {
       setIsSubmitting(true);
       // First, submit the referral
-      const referralResponse = await fetch(`${BASE_URL}/referrals`, {
+      const referralResponse = await fetch(`${BASE_URL}/api/referrals`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -51,7 +51,7 @@ const ReferButton = () => {
         toast.success("Referral submitted successfully!");
 
         // Send the email after successful referral submission
-        const emailResponse = await fetch(`${BASE_URL}/send-emails`, {
+        const emailResponse = await fetch(`${BASE_URL}/api/send-emails`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
