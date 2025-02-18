@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState } from "react";
-import { toast } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const BASE_URL = import.meta.env.VITE_PUBLIC_BASE_URL;
 
@@ -97,7 +97,7 @@ const ReferButton = () => {
       {/* Trigger Button */}
       <button
         onClick={openModal}
-        className="btn btn-lg px-12 bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 rounded mt-5 md:mt-15"
+        className="btn btn-lg px-8 bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 rounded mt-5 md:mt-15"
       >
         Refer Now
       </button>
@@ -105,7 +105,7 @@ const ReferButton = () => {
       {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-40 flex items-center justify-center bg-transparent bg-opacity-50">
-          <div className="bg-blue-300 p-8 rounded-lg w-4/5 lg:w-1/3">
+          <div className="bg-blue-300 p-8 rounded-lg w-4/5  lg:w-2/3">
             <h3 className="font-bold text-center text-3xl mb-10">
               Referral Form
             </h3>
