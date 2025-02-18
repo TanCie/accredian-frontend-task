@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 
+const BASE_URL = import.meta.env.VITE_PUBLIC_BASE_URL;
+
 const ReferButton = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState();
@@ -37,35 +39,31 @@ const ReferButton = () => {
     try {
       setIsSubmitting(true);
       // First, submit the referral
-      const referralResponse = await fetch(
-        "http://localhost:3001/api/referrals",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const referralResponse = await fetch(`${BASE_URL}/referrals`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
       if (referralResponse.ok) {
         toast.success("Referral submitted successfully!");
 
         // Send the email after successful referral submission
-        const emailResponse = await fetch(
-          "http://localhost:3001/api/send-emails",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              to: formData.refereeEmail, // Use the referee's email
-              subject: "Exclusive Discount Just for You!",
-              body: "Click the link below to claim your discount: http://example.com/discount",
-            }),
-          }
-        );
+        const emailResponse = await fetch(`${BASE_URL}/send-emails`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            to: formData.refereeEmail, // Use the referee's email
+            subject: "Exclusive Discount Just for You!",
+            body: `Hello,
+              
+            We’re excited to offer you an exclusive discount on subscribing to Accredian! Click the link below to claim your offer: http://example.com/discount`,
+          }),
+        });
 
         if (emailResponse.ok) {
           console.log("Email sent successfully!");
