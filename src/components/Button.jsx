@@ -3,14 +3,62 @@ import { useState } from "react";
 
 const ReferButton = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    refereeName: "",
+    refereeEmail: "",
+    course: "",
+  });
+
+  const courses = [
+    "PRODUCT_MANAGEMENT",
+    "STRATEGY_LEADERSHIP",
+    "BUSINESS_MANAGEMENT",
+    "FINTECH",
+    "SENIOR_MANAGEMENT",
+    "DATA_SCIENCE",
+    "DIGITAL_TRANSFORMATION",
+    "BUSINESS_ANALYTICS",
+  ];
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Form submitted!"); // Placeholder action
-    closeModal();
+    try {
+      const response = await fetch("http://localhost:3001/api/referrals", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        alert("Referral submitted successfully!");
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          refereeName: "",
+          refereeEmail: "",
+          course: "",
+        });
+        closeModal();
+      } else {
+        alert("Error submitting referral!");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Something went wrong!");
+    }
   };
 
   return (
@@ -37,6 +85,9 @@ const ReferButton = () => {
                 </label>
                 <input
                   type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   className="input input-bordered bg-gray-100 w-full"
                   placeholder="John Doe"
                   required
@@ -47,6 +98,9 @@ const ReferButton = () => {
                 <label className="pb-1 font-semibold italic block">Email</label>
                 <input
                   type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   className="input input-bordered bg-gray-100 w-full"
                   placeholder="johnd@email.com"
                   required
@@ -57,6 +111,9 @@ const ReferButton = () => {
                 <label className="pb-1 font-semibold italic block">Phone</label>
                 <input
                   type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
                   pattern="[0-9]{10}"
                   className="input input-bordered bg-gray-100 w-full"
                   placeholder="Enter 10-digit phone number"
@@ -70,6 +127,9 @@ const ReferButton = () => {
                 </label>
                 <input
                   type="text"
+                  name="refereeName"
+                  value={formData.refereeName}
+                  onChange={handleChange}
                   className="input input-bordered bg-gray-100 w-full"
                   placeholder="Referee Name"
                   required
@@ -82,6 +142,9 @@ const ReferButton = () => {
                 </label>
                 <input
                   type="email"
+                  name="refereeEmail"
+                  value={formData.refereeEmail}
+                  onChange={handleChange}
                   className="input input-bordered bg-gray-100 w-full"
                   placeholder="friend@email.com"
                   required
@@ -93,26 +156,20 @@ const ReferButton = () => {
                   Referring for Course
                 </label>
                 <select
+                  name="course"
+                  value={formData.course}
+                  onChange={handleChange}
                   className="select select-bordered w-full bg-gray-100"
                   required
                 >
-                  <option value="" disabled selected>
+                  <option value="" disabled>
                     Choose an option
                   </option>
-                  <option value="product management">Product Management</option>
-                  <option value="strategy & leadership">
-                    Strategy & Leadership
-                  </option>
-                  <option value="business management">
-                    Business Management
-                  </option>
-                  <option value="fintech">Fintech</option>
-                  <option value="senior management">Senior Management</option>
-                  <option value="data science">Data Science</option>
-                  <option value="digital transformation">
-                    Digital Transformation
-                  </option>
-                  <option value="business analytics">Business Analytics</option>
+                  {courses.map((course) => (
+                    <option key={course} value={course}>
+                      {course.replace("_", " ")}
+                    </option>
+                  ))}
                 </select>
               </div>
 
