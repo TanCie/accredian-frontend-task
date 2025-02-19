@@ -66,7 +66,7 @@ const ReferButton = () => {
         });
 
         if (emailResponse.ok) {
-          console.log("Email sent successfully!");
+          toast.success("An email has been sent to the referee successfully!");
         } else {
           console.log("Failed to send email");
         }
@@ -105,14 +105,18 @@ const ReferButton = () => {
       {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-40 flex items-center justify-center bg-transparent bg-opacity-50">
-          <div className="bg-blue-300 p-8 rounded-lg w-4/5  lg:w-2/3">
-            <h3 className="font-bold text-center text-3xl mb-10">
+          <div className="bg-blue-300 p-8 rounded-lg w-7/8 lg:w-1/2">
+            <h3 className="font-bold text-center text-2xl md:text-3xl mb-8">
               Referral Form
+              <p className="text-xs md:text-sm font-mono mt-2">
+                (All fields marked with <span className="text-red-500">*</span>{" "}
+                are required)
+              </p>
             </h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="pb-1 font-semibold italic block">
-                  Your Name
+                  Name<span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -126,7 +130,9 @@ const ReferButton = () => {
               </div>
 
               <div>
-                <label className="pb-1 font-semibold italic block">Email</label>
+                <label className="pb-1 font-semibold italic block">
+                  Email<span className="text-red-500">*</span>
+                </label>
                 <input
                   type="email"
                   name="email"
@@ -139,7 +145,9 @@ const ReferButton = () => {
               </div>
 
               <div>
-                <label className="pb-1 font-semibold italic block">Phone</label>
+                <label className="pb-1 font-semibold italic block">
+                  Phone<span className="text-red-500">*</span>
+                </label>
                 <input
                   type="tel"
                   name="phone"
@@ -154,7 +162,7 @@ const ReferButton = () => {
 
               <div>
                 <label className="pb-1 font-semibold italic block">
-                  Your Friend's Name
+                  Referee's Name<span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -169,7 +177,7 @@ const ReferButton = () => {
 
               <div>
                 <label className="pb-1 font-semibold italic block">
-                  Your Friend's Email
+                  Referee's Email<span className="text-red-500">*</span>
                 </label>
                 <input
                   type="email"
@@ -184,7 +192,7 @@ const ReferButton = () => {
 
               <div>
                 <label className="pb-1 font-semibold italic block">
-                  Referring for Course
+                  Referring for Course<span className="text-red-500">*</span>
                 </label>
                 <select
                   name="course"
@@ -204,7 +212,7 @@ const ReferButton = () => {
                 </select>
               </div>
 
-              <div className="flex justify-around mt-6">
+              <div className="flex flex-col md:flex-row gap-2 justify-around mt-6">
                 <button
                   type="submit"
                   className="btn btn-lg font-bold btn-success px-10"

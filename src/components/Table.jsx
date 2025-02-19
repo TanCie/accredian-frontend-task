@@ -34,13 +34,13 @@ const Table = () => {
       <table className="lg:w-full mx-auto rounded-lg">
         <thead className="bg-blue-200">
           <tr>
-            <th className="px-4 py-3 text-left text-lg font-medium text-gray-600 uppercase tracking-wider">
+            <th className="px-4 py-3 text-left text-md md:text-lg font-medium text-gray-600 uppercase tracking-wider">
               Programs
             </th>
-            <th className="px-4 py-3 text-left text-lg font-medium text-gray-600 uppercase tracking-wider">
+            <th className="px-4 py-3 text-left text-md md:text-lg font-medium text-gray-600 uppercase tracking-wider">
               Referrer Bonus
             </th>
-            <th className="px-4 py-3 text-left text-lg font-medium text-gray-600 uppercase tracking-wider">
+            <th className="px-4 py-3 text-left text-md md:text-lg font-medium text-gray-600 uppercase tracking-wider">
               Referee Bonus
             </th>
           </tr>
@@ -51,13 +51,17 @@ const Table = () => {
               <td className="px-4 py-4 whitespace-normal break-words">
                 <div className="flex gap-2 items-center">
                   <GiGraduateCap className="text-2xl text-blue-700" />
-                  <span className="break-words">{program}</span>
+                  <span className="break-words text-sm md:text-lg">
+                    {program}
+                  </span>
                 </div>
               </td>
-              <td className="px-4 py-4 text-gray-900">
+              <td className="px-4 py-4 text-gray-900 text-sm md:text-lg">
                 ₹ {referralBonus[index]}
               </td>
-              <td className="px-4 py-4 text-gray-900">₹ {refBonus[index]}</td>
+              <td className="px-4 py-4 text-gray-900 text-sm md:text-lg">
+                ₹ {refBonus[index]}
+              </td>
             </tr>
           ))}
         </tbody>

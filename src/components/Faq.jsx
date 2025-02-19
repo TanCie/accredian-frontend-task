@@ -9,13 +9,13 @@ const Faq = () => {
         </h2>
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="flex flex-col gap-5">
-            <button className="btn px-12 py-6 text-lg btn-ghost hover:text-blue-400 shadow-[0_0_4px_2px_rgb(0_0_0/0.2)]">
+            <button className="btn px-12 py-7 text-lg btn-ghost hover:text-blue-400 shadow-[0_0_4px_2px_rgb(0_0_0/0.2)]">
               Eligibility
             </button>
-            <button className="btn px-12 py-6 text-lg btn-ghost hover:text-blue-400 shadow-[0_0_4px_2px_rgb(0_0_0/0.2)]">
+            <button className="btn px-12 py-7 text-lg btn-ghost hover:text-blue-400 shadow-[0_0_4px_2px_rgb(0_0_0/0.2)]">
               How To Use?
             </button>
-            <button className="btn px-12 py-6 text-lg btn-ghost hover:text-blue-400 shadow-[0_0_4px_2px_rgb(0_0_0/0.2)]">
+            <button className="btn px-12 py-7 text-lg btn-ghost hover:text-blue-400 shadow-[0_0_4px_2px_rgb(0_0_0/0.2)]">
               Terms & Conditions
             </button>
           </div>
